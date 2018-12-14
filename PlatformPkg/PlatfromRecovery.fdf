@@ -1,0 +1,60 @@
+
+INF  MdeModulePkg/Core/Pei/PeiMain.inf
+INF  MdeModulePkg/Universal/PCD/Pei/Pcd.inf
+INF  UefiCpuPkg/CpuIoPei/CpuIoPei.inf 
+INF  $(PLATFORM_PACKAGE)/PlatformEarlyPei/PlatformEarlyPei.inf  
+INF  MdeModulePkg/Universal/ReportStatusCodeRouter/Pei/ReportStatusCodeRouterPei.inf
+INF  ByoModulePkg/StatusCodeHandler/Pei/StatusCodeHandlerPei.inf
+
+INF  MdeModulePkg/Universal/FaultTolerantWritePei/FaultTolerantWritePei.inf
+INF  MdeModulePkg/Universal/Variable/Pei/VariablePei.inf
+
+INF  $(PLATFORM_PACKAGE)/PlatformBootModePei/BootModePei.inf
+
+!if $(TPM_ENABLE) == TRUE
+INF  SecurityPkg/Tcg/Tcg2Config/Tcg2ConfigPei.inf
+INF  SecurityPkg/Tcg/PhysicalPresencePei/PhysicalPresencePei.inf
+INF  SecurityPkg/Tcg/TcgPei/TcgPei.inf
+INF  SecurityPkg/Tcg/Tcg2Pei/Tcg2Pei.inf
+!endif
+
+INF  $(ASIA_SOURCE)/Foundation/Pei/Cpu/AsiaCpuPeim.inf
+INF  $(ASIA_SOURCE)/Foundation/Pei/Dram/AsiaDramPeim.inf
+INF  $(ASIA_SOURCE)/Foundation/Pei/NB/AsiaNbPeim.inf
+INF  $(ASIA_SOURCE)/Foundation/Pei/SB/AsiaSbPeim.inf
+
+INF  MdeModulePkg/Universal/CapsulePei/CapsuleX64.inf
+INF  $(PLATFORM_PACKAGE)/PlatformPei/PlatformPei.inf
+INF  UefiCpuPkg/CpuMpPei/CpuMpPei.inf
+!if $(ZX_SECRET_CODE) == TRUE
+INF  UefiCpuPkg/CpuMpPeiConfig/CpuMpPeiConfig.inf
+!endif
+INF  UefiCpuPkg/PiSmmCommunication/PiSmmCommunicationPei.inf
+INF  UefiCpuPkg/Universal/Acpi/S3Resume2Pei/S3Resume2Pei.inf
+INF  MdeModulePkg/Core/DxeIplPeim/DxeIpl.inf
+INF  MdeModulePkg/Universal/Acpi/FirmwarePerformanceDataTablePei/FirmwarePerformancePei.inf
+
+!if $(TCM_ENABLE) == TRUE
+FILE PEIM = 7ED58C01-51BE-4364-832E-7747B1D79FF7 {
+  SECTION Align=Auto PE32=ByoModulePkg/Security/Tcm/Binary/Sm3HashPei.efi
+  SECTION       PEI_DEPEX=ByoModulePkg/Security/Tcm/Binary/Sm3HashPei.depex
+}
+INF ByoModulePkg/Security/Tcm/Pei/TcmPei.inf
+!endif
+
+#LZMA : EE4E5898-3914-4259-9D6E-DC7BD79403CF
+#TIANO: A31280AD-481E-41B6-95E8-127F4C984779
+# (2014.8.1) FVRECOVERY [79%Full] -> FVRECOVERY [82%Full] 
+# Recovery PEIMs
+!if $(RECOVERY_ENABLE) == TRUE
+FILE FV_IMAGE = 1E9D7604-EF45-46a0-BD8A-71AC78C17AC1 {
+       SECTION PEI_DEPEX_EXP = {gEfiPeiMemoryDiscoveredPpiGuid AND gEfiPeiBootInRecoveryModePpiGuid}
+       SECTION GUIDED A31280AD-481E-41B6-95E8-127F4C984779 {
+          SECTION FV_IMAGE = FVRECOVERY_COMPONENTS
+       }
+     }
+!endif
+
+INF  RuleOverride = FMP_IMAGE_DESC ByoModulePkg/Capsule/SystemFirmwareDescriptor/SystemFirmwareDescriptor.inf
+
+

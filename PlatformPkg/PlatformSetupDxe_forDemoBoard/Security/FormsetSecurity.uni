@@ -1,0 +1,64 @@
+// /** @file
+//
+// Copyright (c) 2010 - 2016, Byosoft Corporation.<BR>
+// All rights reserved.This software and associated documentation (if any)
+// is furnished under a license and may only be used or copied in
+// accordance with the terms of the license. Except as permitted by such
+// license, no part of this software or documentation may be reproduced,
+// stored in a retrieval system, or transmitted in any form or by any
+// means without the express written consent of Byosoft Corporation.
+//
+// File Name:
+//
+// Abstract:
+//   Platform configuration setup.
+//
+// Revision History:
+//
+//
+// **/
+/=#
+#langdef   en-US "English"
+#langdef   zh-Hans "\wide中文\narrow"
+
+
+#string FORMSET_TITLE_SECURITY          #language en-US "Security"
+                                        #language zh-Hans "\wide安全\narrow"
+#string FORMSET_TITLE_SECURITY_HELP     #language en-US "Security Settings"
+                                        #language zh-Hans "\wide安全配置\narrow"
+#string STR_EMPTY                       #language en-US   "" 
+                                        #language zh-Hans ""
+#string STR_SECUREBOOT_TITLE            #language en-US "Secure Boot"
+                                        #language zh-Hans "\wide安全启动\narrow"
+#string STR_SECUREBOOT_HELP             #language en-US "Secure boot settings, include enable/disable function and remove/restore keys." 
+                                        #language zh-Hans "\wide安全启动设定，包括打开\narrow/\wide关闭此功能，以及移除\narrow/\wide恢复证书\narrow"                                        
+#string STR_PASSWORD_INSTALLED          #language en-US "Installed"
+                                        #language zh-Hans "\wide已设定\narrow"
+#string STR_PASSWORD_UNINSTALLED        #language en-US "Not Installed"
+                                        #language zh-Hans "\wide未设定\narrow"
+#string STR_ADMIN_PASSWORD              #language en-US "Administrator Password"
+                                        #language zh-Hans "\wide管理员密码\narrow"
+#string STR_SET_ADMIN_PASSWORD          #language en-US "Set Administrator Password"
+                                        #language zh-Hans "\wide设定管理员密码\narrow"
+#string STR_ADMIN_PASSWORD_HELP         #language en-US "Select this item to set, change, or delete Administrator Password. a-z, 0-9 and special printable character are supported. Passwords are not case sensitive. The limited length of password string is 6 to 20.\n\nNOTE:\nTo delete Password, enter blank when input new password."
+                                        #language zh-Hans "\wide选择这一项来设定、更改以及删除管理员密码\narrow.\wide密码支持字符包括字母、数字以及其它可打印字符\narrow.\wide密码不区分大小写\narrow.\wide支持输入密码长度为\narrow6\wide到\narrow20.\n\n\wide注意\narrow:\n\wide输入密码时按\narrowEnter\wide键输入空可以删除密码\narrow."
+#string STR_USER_PASSWORD               #language en-US "Power-On Password"
+                                        #language zh-Hans "\wide开机密码\narrow"
+#string STR_SET_USER_PASSWORD           #language en-US "Set Power-On Password"
+                                        #language zh-Hans "\wide设定开机密码\narrow"
+
+#string STR_USER_PASSWORD_HELP          #language en-US "Select this item to set, change, or delete Power-On Password. a-z, 0-9 and special printable character are supported. Passwords are not case sensitive. The limited length of password string is 6 to 20.\n\nNOTE:\nTo delete Password, enter blank when input new password."
+                                        #language zh-Hans "\wide选择这一项来设定、更改以及删除开机密码\narrow.\wide密码支持字符包括字母、数字以及其它可打印字符\narrow.\wide密码不区分大小写\narrow.\wide支持输入密码长度为\narrow6\wide到\narrow20.\n\n\wide注意\narrow:\n\wide输入密码时按\narrowEnter\wide键输入空可以删除密码\narrow."
+
+#string STR_POP_ON_RESTART              #language en-US  "Require POP on Restart"
+                                        #language zh-Hans "\wide重启时需输入开机密码\narrow"
+#string STR_POP_ON_RESTART_HELP         #language en-US  "The Power-On Password will be required when the system is started with reboot."
+                                        #language zh-Hans "\wide重启需要输入开机密码\narrow."
+#string STR_CHANGE_POP_BY_USER          #language en-US  "POP Changeable by User"
+                                        #language zh-Hans "\wide允许更改开机密码\narrow"
+#string STR_CHANGE_POP_BY_USER_HELP     #language en-US  "The Power-On Password can be locked by Adiministrator."
+                                        #language zh-Hans "\wide开机密码可以被管理员锁住\narrow."
+#string STR_CLEAR_USER_PASSWORD         #language en-US "Clear Pop Password"
+                                        #language zh-Hans "\wide清除用户密码\narrow"
+#string STR_CLEAR_USER_PASSWORD_HELP    #language en-US "Set Pop Password to Empty."
+                                        #language zh-Hans "\wide清空用户密码\narrow."

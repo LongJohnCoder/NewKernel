@@ -1,0 +1,174 @@
+/*++
+
+Copyright (c) 2010 - 2018, Byosoft Corporation.<BR>
+All rights reserved.This software and associated documentation (if any)
+is furnished under a license and may only be used or copied in
+accordance with the terms of the license. Except as permitted by such
+license, no part of this software or documentation may be reproduced,
+stored in a retrieval system, or transmitted in any form or by any
+means without the express written consent of Byosoft Corporation.
+
+File Name:
+
+Abstract:
+  Platform configuration setup.
+
+Revision History:
+
+
+--*/
+
+#include "FormsetConfiguration.h" 
+#include <Guid/TcgConfigHii.h>
+#include <Guid/Tcg2ConfigHii.h>
+#include <Guid/TcmSetupCfgGuid.h>
+#include <Guid/SecureBootConfigHii.h>
+
+
+#define SECURITY_FORM_SET
+
+#define FORM_SET_TYPEDEF
+  #include <SetupDefinitions.h>
+#undef FORM_SET_TYPEDEF
+
+formset
+  guid     = FORMSET_GUID_SECURITY,
+  title    = STRING_TOKEN(FORMSET_TITLE_SECURITY),
+  help     = STRING_TOKEN(FORMSET_TITLE_SECURITY_HELP),
+  class    = BYO_FORMSET_CLASS,
+  subclass = BYO_FORMSET_SUB_CLASS,
+
+
+  #define FORM_SET_VARSTORE
+    #include <SetupDefinitions.h>
+  #undef FORM_SET_VARSTORE
+
+  SYSTEM_PASSWORD_VARSTORE
+
+  form formid = ROOT_FORM_ID,
+    title    = STRING_TOKEN(FORMSET_TITLE_SECURITY);
+
+    subtitle text = STRING_TOKEN(STR_EMPTY);
+
+    grayoutif TRUE;
+      suppressif ideqval SYS_PD.bHaveAdmin == 0x00;
+      text
+        help   = STRING_TOKEN(STR_EMPTY),
+        text   = STRING_TOKEN(STR_ADMIN_PASSWORD),
+        text   = STRING_TOKEN(STR_PASSWORD_INSTALLED),
+        flags  = 0,
+        key    = 0;
+      endif;
+
+      suppressif NOT ideqval SYS_PD.bHaveAdmin == 0x00;
+      text
+        help   = STRING_TOKEN(STR_EMPTY),
+        text   = STRING_TOKEN(STR_ADMIN_PASSWORD),
+        text   = STRING_TOKEN(STR_PASSWORD_UNINSTALLED),
+        flags  = 0,
+        key    = 0;
+      endif;
+    endif;
+	
+    grayoutif TRUE;
+    suppressif ideqval SYS_PD.bHavePowerOn == 0x00;
+    text
+        help   = STRING_TOKEN(STR_EMPTY),
+        text   = STRING_TOKEN(STR_USER_PASSWORD),
+        text   = STRING_TOKEN(STR_PASSWORD_INSTALLED),
+        flags  = 0,
+        key    = 0;
+    endif;
+
+    suppressif NOT ideqval SYS_PD.bHavePowerOn == 0x00;
+    text
+        help   = STRING_TOKEN(STR_EMPTY),
+        text   = STRING_TOKEN(STR_USER_PASSWORD),
+        text   = STRING_TOKEN(STR_PASSWORD_UNINSTALLED),
+        flags  = 0,
+        key    = 0;
+    endif;
+    endif;
+
+    subtitle text = STRING_TOKEN(STR_EMPTY);
+    LOGIN_TYPE_ADMIN;
+    password varid  = SYS_PD.Admin, 
+        prompt      = STRING_TOKEN(STR_SET_ADMIN_PASSWORD),
+        help        = STRING_TOKEN(STR_ADMIN_PASSWORD_HELP),
+        flags       = 0 | RESET_REQUIRED | INTERACTIVE, key = SEC_KEY_ADMIN_PD,
+        minsize     = 6,
+        maxsize     = SYSTEM_PASSWORD_LENGTH,
+    endpassword;
+    END_LOGIN_TYPE;
+
+    grayoutif ideqval SYS_PD.ChangePopByUser == 0x0;
+    password varid  = SYS_PD.PowerOn,
+        prompt      = STRING_TOKEN(STR_SET_USER_PASSWORD),
+        help        = STRING_TOKEN(STR_USER_PASSWORD_HELP),
+        flags       = 0 | RESET_REQUIRED | INTERACTIVE, key = SEC_KEY_POWER_ON_PD,
+        minsize     = 6,
+        maxsize     = SYSTEM_PASSWORD_LENGTH,
+    endpassword;
+    endif;
+
+    subtitle text = STRING_TOKEN(STR_EMPTY);
+    LOGIN_TYPE == LOGIN_USER_POP;	
+    suppressif ideqval SYS_PD.bHaveAdmin == 0x00;
+    oneof varid   = SYS_PD.ChangePopByUser,
+      prompt      = STRING_TOKEN(STR_CHANGE_POP_BY_USER),
+      help        = STRING_TOKEN(STR_CHANGE_POP_BY_USER_HELP),
+      option text = STRING_TOKEN(STR_ENABLED), value = 1, flags = DEFAULT | MANUFACTURING |RESET_REQUIRED;
+      option text = STRING_TOKEN(STR_DISABLED),  value = 0, flags = RESET_REQUIRED;
+    endoneof;
+    endif;
+    END_LOGIN_TYPE;	
+
+    suppressif ideqval SYS_PD.bHavePowerOn == 0x00;
+    grayoutif ideqval SYS_PD.EnteredType == LOGIN_USER_POP;
+    oneof varid   = SYS_PD.RequirePopOnRestart,
+      prompt      = STRING_TOKEN(STR_POP_ON_RESTART),
+      help        = STRING_TOKEN(STR_POP_ON_RESTART_HELP),
+      option text = STRING_TOKEN(STR_ENABLED), value = 1, flags = RESET_REQUIRED;
+      option text = STRING_TOKEN(STR_DISABLED),  value = 0, flags = DEFAULT | MANUFACTURING |RESET_REQUIRED;
+    endoneof;
+    endif;
+    endif;
+
+    LOGIN_TYPE_ADMIN;	
+    suppressif ideqval SYS_PD.bHavePowerOn == 0x00 OR
+      ideqval SYS_PD.ChangePopByUser == 0;
+      suppressif ideqval SYS_PD.bHaveAdmin == 0x00;
+    text 
+      help   = STRING_TOKEN(STR_CLEAR_USER_PASSWORD_HELP),
+      text   = STRING_TOKEN(STR_CLEAR_USER_PASSWORD),
+      flags  = 0 | RESET_REQUIRED | INTERACTIVE,
+      key    = SEC_KEY_CLEAR_USER_PD;      
+    endif;
+    endif;
+    END_LOGIN_TYPE;
+
+
+    LOGIN_TYPE_ADMIN;
+
+  #define FORM_SET_ITEM
+    #include <SetupDefinitions.h>
+  #undef FORM_SET_ITEM
+  
+  #define FORM_SET_GOTO
+    #include <SetupDefinitions.h>
+  #undef FORM_SET_GOTO  
+
+    subtitle text = STRING_TOKEN(STR_EMPTY);
+
+    label 0x1234;
+    label 0xFFFF;
+  
+    END_LOGIN_TYPE;
+ 
+  endform;  
+
+  #define FORM_SET_FORM
+     #include <SetupDefinitions.h>
+  #undef FORM_SET_FORM
+   
+endformset;

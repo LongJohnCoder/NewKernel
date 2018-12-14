@@ -1,0 +1,85 @@
+#/** @file
+#==========================================================================================
+#      NOTICE: Copyright (c) 2006 - 2017 Byosoft Corporation. All rights reserved.
+#              This program and associated documentation (if any) is furnished
+#              under a license. Except as permitted by such license,no part of this
+#              program or documentation may be reproduced, stored divulged or used
+#              in a public system, or transmitted in any form or by any means
+#              without the express written consent of Byosoft Corporation.
+#==========================================================================================
+#
+#THE PROGRAM IS DISTRIBUTED UNDER THE BSD LICENSE ON AN "AS IS" BASIS,
+#WITHOUT WARRANTIES OR REPRESENTATIONS OF ANY KIND, EITHER EXPRESS OR IMPLIED.
+#
+#**/
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = FvbServiceDxe
+  FILE_GUID                      = D5DA8FA8-EB80-4f92-A9FE-82B3F68E0329
+  MODULE_TYPE                    = DXE_RUNTIME_DRIVER
+  VERSION_STRING                 = 1.0
+  ENTRY_POINT                    = FvbInitialize
+
+#
+# The following information is for reference only and not required by the build tools.
+#
+#  VALID_ARCHITECTURES           = IA32 X64
+#
+#  VIRTUAL_ADDRESS_MAP_CALLBACK  =  FvbVirtualddressChangeEvent                  
+#
+
+[Sources.common]
+  FvbInfo.c
+  FvbService.h
+  FvbService.c
+  
+[Sources.Ia32]
+
+[Sources.X64]
+
+[Sources.IPF]
+
+[Packages]
+  MdePkg/MdePkg.dec
+  MdeModulePkg/MdeModulePkg.dec
+  IntelFrameworkModulePkg/IntelFrameworkModulePkg.dec
+  ByoModulePkg/ByoModulePkg.dec
+  ByoNvMediaPkg/ByoNvMediaPkg.dec
+
+[LibraryClasses]
+  PcdLib
+  MemoryAllocationLib
+  CacheMaintenanceLib
+  IoLib
+  BaseMemoryLib
+  DebugLib
+  BaseLib
+  UefiLib
+  UefiRuntimeLib
+  BaseLib
+  UefiBootServicesTableLib
+  UefiDriverEntryPoint
+  HobLib
+
+[Guids]
+  gEfiFirmwareFileSystem2Guid                   # ALWAYS_CONSUMED
+  gEfiSystemNvDataFvGuid                        # ALWAYS_CONSUMED
+  gEfiEventVirtualAddressChangeGuid
+
+[Protocols]
+  gEfiDevicePathProtocolGuid                    # PROTOCOL ALWAYS_PRODUCED
+  gEfiFirmwareVolumeBlockProtocolGuid           # PROTOCOL ALWAYS_PRODUCED
+  gEfiNvMediaAccessProtocolGuid
+  gEfiNvMediaDeviceProtocolGuid
+  
+[FixedPcd]
+  gEfiByoModulePkgTokenSpaceGuid.PcdFlashFvMainBase
+  gEfiByoModulePkgTokenSpaceGuid.PcdFlashFvMainSize
+  gEfiByoModulePkgTokenSpaceGuid.PcdFlashNvStorageBase
+  gEfiByoModulePkgTokenSpaceGuid.PcdFlashNvStorageSize
+  gEfiByoModulePkgTokenSpaceGuid.PcdFlashFvRecoveryBase  
+  gEfiByoModulePkgTokenSpaceGuid.PcdFlashFvRecoverySize
+  
+[Depex]
+  gEfiNvMediaDeviceProtocolGuid

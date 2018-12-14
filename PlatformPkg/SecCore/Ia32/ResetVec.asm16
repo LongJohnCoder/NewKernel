@@ -1,0 +1,90 @@
+; @file
+;
+;Copyright (c) 2006 - 2018, Byosoft Corporation.<BR>
+;All rights reserved.This software and associated documentation (if any)
+;is furnished under a license and may only be used or copied in
+;accordance with the terms of the license. Except as permitted by such
+;license, no part of this software or documentation may be reproduced,
+;stored in a retrieval system, or transmitted in any form or by any
+;means without the express written consent of Byosoft Corporation.
+;
+;File Name:
+;  ResetVec.asm16
+;
+;Abstract:
+;
+;Revision History:
+;
+;
+
+    .model  tiny
+    .686p
+    .stack  0h
+    .code
+
+    
+THIS_BINARY_BASE equ     0FFFFFF00h
+
+    ORG     (_PCD_VALUE_PcdBiosSecTableAddress - THIS_BINARY_BASE)
+    
+;----------------------- V1 -----------------------
+SecTableSignature        dq      _PCD_VALUE_PcdBiosSecTableSignature
+SecTableVersion          dd      _PCD_VALUE_PcdBiosSecTableVersion
+BiosAreaBaseAddress      dd      _PCD_VALUE_PcdFlashAreaBaseAddress
+FvMainStart              dd      _PCD_VALUE_PcdFlashFvMainBase
+FvMainSize               dd      _PCD_VALUE_PcdFlashFvMainSize
+BiosEventLogStart        dd      0
+BiosEventLogSize         dd      0
+
+;----------------------- V2+ -----------------------
+BiosSize                 dd      _PCD_VALUE_PcdFlashAreaSize    
+AcpiIoBase               dw      _PCD_VALUE_AcpiIoPortBaseAddress
+SmiPort                  dw      _PCD_VALUE_PcdSwSmiCmdPort
+BiosInfoOffset           dd      0
+BiosIdAddress            dd      0
+FvBBBUAddress            dd      _PCD_VALUE_PcdFlashFvRecoveryBackUpBase  
+
+
+
+
+    
+    ORG     (0FFFFFFA0h - THIS_BINARY_BASE)
+;-------------------------------------------------------------------------------
+    include ZxPlatformRomsip\RomSip.inc
+
+#ifdef ZX_TXT_SUPPORT
+	ORG     (0FFFFFFC0h - THIS_BINARY_BASE)   ; 0FFFFFFC0
+	dd      0FF910000h                        ; FIT pointer, point to BIOS bin 0x00110000.
+	dd      080000000h
+#endif
+
+;-------------------------------------------------------------------------------
+		
+	  ORG     (0FFFFFFD0h - THIS_BINARY_BASE)
+    dd      0FFFFFFA0h
+
+    ORG     (0FFFFFFE0h - THIS_BINARY_BASE)
+PeiCoreEntryPoint        dd      12345678h
+
+
+    ORG     (0FFFFFFF0h - THIS_BINARY_BASE)
+    nop
+    nop
+    DB      0e9h
+    DW      -3    
+
+
+
+    ORG     (0FFFFFFF8h - THIS_BINARY_BASE)
+ApSegAddress    dd      12345678h
+
+    ORG     (0FFFFFFFCh - THIS_BINARY_BASE)
+BfvBase         dd      12345678h
+
+    END
+
+    
+    
+    
+    
+    

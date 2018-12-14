@@ -1,0 +1,129 @@
+
+//**********************************************************************
+#ifdef FORM_SET_TYPEDEF
+
+#endif
+
+#ifdef MAIN_FORM_SET
+
+#ifdef FORM_SET_VARSTORE
+
+#endif
+
+#ifdef FORM_SET_ITEM
+/*    
+    text
+      help   = STRING_TOKEN(STR_EMPTY),
+      text   = STRING_TOKEN(STR_CHIPVERSION_NAME),
+      text   = STRING_TOKEN(STR_CHIPVERSION_VALUE),
+      flags  = 0,
+      key    = 0; 
+       
+    text
+      help   = STRING_TOKEN(STR_EMPTY),
+      text   = STRING_TOKEN(STR_CHIPVERSION_IOE_NAME),
+      text   = STRING_TOKEN(STR_CHIPVERSION_IOE_VALUE),
+      flags  = 0,
+      key    = 0;      
+*/    
+    text 
+      help   = STRING_TOKEN(STR_EMPTY),
+      text   = STRING_TOKEN(STR_PROCESSOR_VERSION),
+      text   = STRING_TOKEN(STR_PROCESSOR_VERSION_VALUE),
+      flags  = 0, 
+      key    = 0;
+
+    text 
+      help   = STRING_TOKEN(STR_EMPTY),
+      text   = STRING_TOKEN(STR_MEMORY_SIZE_NAME),
+      text   = STRING_TOKEN(STR_MEMORY_SIZE_VALUE),
+      flags  = 0,
+      key    = 0;
+      
+    text
+      help   = STRING_TOKEN(STR_EMPTY),
+      text   = STRING_TOKEN(STR_MEMORY_FREQ_NAME),
+      text   = STRING_TOKEN(STR_MEMORY_FREQ_VALUE),
+      flags  = 0,
+      key    = 0;      
+      
+    text
+      help   = STRING_TOKEN(STR_EMPTY),
+      text   = STRING_TOKEN(STR_LAN_MAC_ADDR_NAME),
+      text   = STRING_TOKEN(STR_LAN_MAC_ADDR_VALUE),
+      flags  = 0,
+      key    = 0;       
+          
+#endif
+
+#ifdef FORM_SET_FORM
+
+  form formid = MAIN_SYSTEM_SUMMARY_FORM_ID, 
+  
+    title = STRING_TOKEN(STR_SYSTEM_SUMMARY);
+
+    text 
+      help   = STRING_TOKEN(STR_EMPTY),
+      text   = STRING_TOKEN(STR_PROCESSOR_SPEED_STRING),
+      text   = STRING_TOKEN(STR_PROCESSOR_SPEED_VALUE),
+      flags  = 0, 
+      key    = 0;
+      
+    text 
+      help   = STRING_TOKEN(STR_EMPTY),
+      text   = STRING_TOKEN(STR_PROCESSOR_CORE_COUNT_STRING),
+      text   = STRING_TOKEN(STR_PROCESSOR_CORE_COUNT_VALUE),
+      flags  = 0, 
+      key    = 0;
+
+    text 
+      help   = STRING_TOKEN(STR_EMPTY),
+      text   = STRING_TOKEN(STR_PROCESSOR_MICROCODE),
+      text   = STRING_TOKEN(STR_PROCESSOR_MICROCODE_VALUE),
+      flags  = 0, 
+      key    = 0;      
+      
+    subtitle text = STRING_TOKEN(STR_EMPTY);
+
+      text
+        help   = STRING_TOKEN(STR_EMPTY),
+        text   = STRING_TOKEN(STR_SYSTEM_MANUFACTURER_NAME),
+        text   = STRING_TOKEN(STR_SYSTEM_MANUFACTURER_VALUE),
+        flags  = 0,
+        key    = 0;      
+
+      
+      text
+        help   = STRING_TOKEN(STR_EMPTY),
+        text   = STRING_TOKEN(STR_SYSTEM_SERIAL_NUMBER_NAME),
+        text   = STRING_TOKEN(STR_SYSTEM_SERIAL_NUMBER_VALUE),
+        flags  = 0,
+        key    = 0;
+
+      text
+        help   = STRING_TOKEN(STR_EMPTY),
+        text   = STRING_TOKEN(STR_ASSET_TAG_NAME),
+        text   = STRING_TOKEN(STR_ASSET_TAG_VALUE),
+        flags  = 0,
+        key    = 0;
+    
+    text
+      help   = STRING_TOKEN(STR_EMPTY),
+      text   = STRING_TOKEN(STR_SYSTEM_UUID_NAME),
+      text   = STRING_TOKEN(STR_SYSTEM_UUID_VALUE),
+      flags  = 0,
+      key    = 0;
+
+  endform; 
+   
+#endif               // FORM_SET_FORM
+
+
+
+  #ifdef FORM_SET_GOTO
+    goto MAIN_SYSTEM_SUMMARY_FORM_ID,
+      prompt = STRING_TOKEN(STR_SYSTEM_SUMMARY),
+      help   = STRING_TOKEN(STR_SYSTEM_SUMMARY);
+  #endif
+
+#endif           // MAIN_FORM_SET

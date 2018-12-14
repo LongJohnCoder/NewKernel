@@ -1,0 +1,48 @@
+/** @file
+  VFR file used by the TCG2 configuration component.
+
+Copyright (c) 2015 - 2017, Intel Corporation. All rights reserved.<BR>
+This program and the accompanying materials 
+are licensed and made available under the terms and conditions of the BSD License 
+which accompanies this distribution.  The full text of the license may be found at 
+http://opensource.org/licenses/bsd-license.php
+
+THE PROGRAM IS DISTRIBUTED UNDER THE BSD LICENSE ON AN "AS IS" BASIS, 
+WITHOUT WARRANTIES OR REPRESENTATIONS OF ANY KIND, EITHER EXPRESS OR IMPLIED.
+
+**/
+
+#include "Tcg2ConfigNvData.h"
+
+formset
+  guid      = TCG2_CONFIG_FORM_SET_GUID,
+  title     = STRING_TOKEN(STR_TCG2_TITLE),
+  help      = STRING_TOKEN(STR_TCG2_HELP),
+  classguid = EFI_HII_PLATFORM_SETUP_FORMSET_GUID,
+
+  efivarstore TCG2_CONFIGURATION,
+    varid = TCG2_CONFIGURATION_VARSTORE_ID,
+    attribute = 0x03,  // EFI variable attribures  EFI_VARIABLE_BOOTSERVICE_ACCESS | EFI_VARIABLE_NON_VOLATILE
+    name  = TCG2_CONFIGURATION,
+    guid  = TCG2_CONFIG_FORM_SET_GUID;
+
+  form formid = TCG2_CONFIGURATION_FORM_ID,
+    title = STRING_TOKEN(STR_TCG2_TITLE);
+
+    subtitle text = STRING_TOKEN(STR_NULL);
+    subtitle text = STRING_TOKEN(STR_TCG2_PP_OPERATION);
+
+    oneof name = Tpm2Operation,
+          questionid = KEY_TPM2_OPERATION,
+          prompt = STRING_TOKEN(STR_TCG2_OPERATION),
+          help   = STRING_TOKEN(STR_TCG2_OPERATION_HELP),
+          flags  = INTERACTIVE | NUMERIC_SIZE_1,
+          option text = STRING_TOKEN(STR_TCG2_NO_ACTION), value = TCG2_PHYSICAL_PRESENCE_NO_ACTION, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED;
+          option text = STRING_TOKEN(STR_TCG2_CLEAR),     value = TCG2_PHYSICAL_PRESENCE_CLEAR, flags = RESET_REQUIRED;
+    endoneof;
+    
+
+
+  endform;
+
+endformset;

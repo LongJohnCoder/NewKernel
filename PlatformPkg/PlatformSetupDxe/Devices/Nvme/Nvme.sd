@@ -1,0 +1,53 @@
+/*++
+Copyright (c) 2006-2018 Byosoft Corporation. All rights reserved.
+This software and associated documentation (if any) is furnished
+under a license and may only be used or copied in accordance
+with the terms of the license. Except as permitted by such
+license, no part of this software or documentation may be
+reproduced, stored in a retrieval system, or transmitted in any
+form or by any means without the express written consent of
+Byosoft Corporation.
+
+Module Name:
+
+  Nvme.sd
+
+Abstract:
+
+  NVME OPTIONROM CONFIGURATION FORM TEMPLATE
+
+--*/
+
+#ifdef DEVICES_FORM_SET
+
+  #ifdef FORM_SET_GOTO
+    //
+    // Define goto commands for the forms defined in this file
+    //
+    goto NVME_SETUP_FORM_ID, 
+      prompt = STRING_TOKEN(STR_NVME_SETUP_FORM),
+      help = STRING_TOKEN(STR_NVME_SETUP_FORM_HELP);
+
+  #endif
+
+  #ifdef FORM_SET_FORM
+    //
+    // Define forms
+    //
+    form formid = AUTO_ID(NVME_SETUP_FORM_ID),
+      title = STRING_TOKEN(STR_NVME_SETUP_FORM);
+
+      subtitle text = STRING_TOKEN(STR_EMPTY);
+        
+      oneof varid  = SETUP_DATA.NvmeOpRomPriority,
+        prompt = STRING_TOKEN(STR_NVME_OPTIONROM_PRIORITY),
+        help = STRING_TOKEN(STR_NVME_OPTIONROM_PRIORITY_HELP),
+        option text = STRING_TOKEN(STR_BIOS_FIRST), value = 0, flags = RESET_REQUIRED | DEFAULT | MANUFACTURING;
+        option text = STRING_TOKEN(STR_ADDON_FIRST), value = 1, flags = RESET_REQUIRED;
+      endoneof;
+     
+    endform;
+
+  #endif
+
+#endif

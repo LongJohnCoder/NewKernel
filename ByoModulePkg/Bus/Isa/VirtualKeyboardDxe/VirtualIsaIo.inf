@@ -1,0 +1,41 @@
+
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = VirtualIsaIo
+  FILE_GUID                      = 6B848B10-94E5-40ee-A7FE-13359C46B743
+  MODULE_TYPE                    = DXE_DRIVER
+  VERSION_STRING                 = 1.0
+  ENTRY_POINT                    = VirtualIsaIoDxeEntry
+
+[Sources]
+  VirtualIsaIo.c
+
+[Packages]
+  MdePkg/MdePkg.dec
+  IntelFrameworkPkg/IntelFrameworkPkg.dec
+  IntelFrameworkModulePkg/IntelFrameworkModulePkg.dec
+  ByoModulePkg/ByoModulePkg.dec
+
+[LibraryClasses]
+  DebugLib
+  UefiBootServicesTableLib
+  UefiLib
+  UefiDriverEntryPoint
+  BaseLib
+  PcdLib
+  IoLib
+
+[Protocols]
+  gEfiIsaIoProtocolGuid                         # PROTOCOL TO_START
+  gEfiUsb2HcProtocolGuid
+  gEfiVirtualIsaIoProtocolGuid
+  gEfiPciIoProtocolGuid
+
+[FeaturePcd]
+
+[Pcd]
+  gEfiByoModulePkgTokenSpaceGuid.PcdKbcPresent
+
+[Depex]
+  TRUE

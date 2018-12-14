@@ -1,0 +1,69 @@
+#
+## @file
+# Copyright (c) 2018, Byosoft Software Corporation. All Rights Reserved.
+#
+# You may not reproduce, distribute, publish, display, perform, modify, adapt,
+# transmit, broadcast, present, recite, release, license or otherwise exploit# any part of this publication in any form, by any means, without the prior
+# written permission of Byosoft Software Corporation.
+#
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = SetupUiLib
+  MODULE_UNI_FILE                = SetupUiLibModStrs.uni
+  FILE_GUID                      = EECDAB61-5444-429d-A789-06F3405AC5E4
+  MODULE_TYPE                    = DXE_DRIVER
+  VERSION_STRING                 = 1.0
+  LIBRARY_CLASS                  = SetupUiLib|DXE_DRIVER UEFI_APPLICATION
+  CONSTRUCTOR                    = SetupUiLibConstructor
+  DESTRUCTOR                     = SetupUiLibDestructor
+#
+# The following information is for reference only and not required by the build tools.
+#
+#  VALID_ARCHITECTURES           = IA32 X64 IPF EBC
+#
+
+[Sources]
+  SetupUiLib.c  
+  SetupUiLibInternal.c
+  SetupUiLib.uni
+
+[Packages]
+  ByoModulePkg/ByoModulePkg.dec
+  MdePkg/MdePkg.dec
+  MdeModulePkg/MdeModulePkg.dec
+
+[LibraryClasses]
+  MemoryAllocationLib
+  BaseLib
+  UefiBootServicesTableLib
+  UefiRuntimeServicesTableLib
+  BaseMemoryLib
+  DebugLib
+  PrintLib
+  HiiLib
+  DevicePathLib
+  PcdLib
+  PlatformLanguageLib
+
+
+[Guids]
+  gEfiIfrTianoGuid  ## SOMETIMES_CONSUMES   ## UNDEFINED
+  gEfiConsoleOutDeviceGuid
+
+[Protocols]
+  gEfiGraphicsOutputProtocolGuid
+  gEfiSetupMouseProtocolGuid
+
+[Pcd]
+  gEfiByoModulePkgTokenSpaceGuid.PcdTextSetupMouseEnable
+  gEfiMdeModulePkgTokenSpaceGuid.PcdConOutRow
+  gEfiMdeModulePkgTokenSpaceGuid.PcdConOutColumn
+  gEfiMdeModulePkgTokenSpaceGuid.PcdVideoHorizontalResolution
+  gEfiMdeModulePkgTokenSpaceGuid.PcdVideoVerticalResolution
+  gEfiMdeModulePkgTokenSpaceGuid.PcdSetupConOutColumn
+  gEfiMdeModulePkgTokenSpaceGuid.PcdSetupConOutRow
+  gEfiMdeModulePkgTokenSpaceGuid.PcdSetupVideoHorizontalResolution
+  gEfiMdeModulePkgTokenSpaceGuid.PcdSetupVideoVerticalResolution
+  gEfiByoModulePkgTokenSpaceGuid.PcdUCREnable
+

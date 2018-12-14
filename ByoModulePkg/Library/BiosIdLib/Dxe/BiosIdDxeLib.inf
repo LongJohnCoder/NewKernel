@@ -1,0 +1,52 @@
+#/** @file
+#==========================================================================================
+#      NOTICE: Copyright (c) 2006 - 2017 Byosoft Corporation. All rights reserved.
+#              This program and associated documentation (if any) is furnished
+#              under a license. Except as permitted by such license,no part of this
+#              program or documentation may be reproduced, stored divulged or used
+#              in a public system, or transmitted in any form or by any means
+#              without the express written consent of Byosoft Corporation.
+#==========================================================================================
+#
+#THE PROGRAM IS DISTRIBUTED UNDER THE BSD LICENSE ON AN "AS IS" BASIS,
+#WITHOUT WARRANTIES OR REPRESENTATIONS OF ANY KIND, EITHER EXPRESS OR IMPLIED.
+#
+#**/
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = BiosIdDxeLib
+  FILE_GUID                      = 35B2CD8F-8638-4629-AFE1-1F5DE188C1AD
+  MODULE_TYPE                    = DXE_DRIVER
+  VERSION_STRING                 = 1.0
+  LIBRARY_CLASS                  = BiosIdLib|DXE_DRIVER DXE_RUNTIME_DRIVER DXE_SMM_DRIVER UEFI_APPLICATION
+
+
+[Sources]
+  BiosIdDxeLib.c
+  
+  
+[Packages]
+  MdePkg/MdePkg.dec
+  MdeModulePkg/MdeModulePkg.dec
+  ByoModulePkg/ByoModulePkg.dec
+
+  
+[LibraryClasses]
+  DebugLib
+  BaseLib
+  PcdLib
+  MemoryAllocationLib
+   
+
+[Guids]
+  gEfiBiosIdGuid
+  
+[Pcd]
+  gEfiByoModulePkgTokenSpaceGuid.PcdFlashFvMainBase  
+  gEfiByoModulePkgTokenSpaceGuid.PcdFlashFvMainSize
+  gEfiByoModulePkgTokenSpaceGuid.PcdFlashFvRecoveryBase
+  gEfiByoModulePkgTokenSpaceGuid.PcdFlashFvRecoverySize  
+  gEfiByoModulePkgTokenSpaceGuid.PcdFlashAreaBaseAddress
+  gEfiByoModulePkgTokenSpaceGuid.PcdBiosIdPtr
+  

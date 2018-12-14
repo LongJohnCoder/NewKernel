@@ -1,0 +1,61 @@
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = ByoCommLib
+  FILE_GUID                      = 4F3B6AF1-06EF-4512-9223-6AD61362653B
+  MODULE_TYPE                    = BASE
+  VERSION_STRING                 = 1.0
+  LIBRARY_CLASS                  = ByoCommLib
+
+
+#
+# The following information is for reference only and not required by the build tools.
+#
+#  VALID_ARCHITECTURES           = IA32 X64 IPF EBC
+#
+
+[Sources]
+  ByoCommLib.c
+
+
+
+[Packages]
+  MdePkg/MdePkg.dec
+  MdeModulePkg/MdeModulePkg.dec
+  ByoModulePkg/ByoModulePkg.dec  
+  UefiCpuPkg/UefiCpuPkg.dec
+
+
+[LibraryClasses]
+  PcdLib
+  IoLib
+  BaseLib
+  TimerLib
+  HobLib
+  PciLib
+
+
+[Guids]
+  gEfiConsoleOutDeviceGuid
+  gEfiDiskInfoIdeInterfaceGuid
+  gEfiDiskInfoAhciInterfaceGuid
+  
+  
+[Protocols]
+  gEfiGraphicsOutputProtocolGuid  
+  gEfiExtScsiPassThruProtocolGuid
+  gEfiAtaPassThruProtocolGuid
+  gEfiPciIoProtocolGuid
+  gEfiDevicePathProtocolGuid
+  gEfiDiskInfoProtocolGuid
+  gEfiDevicePathToTextProtocolGuid
+  gEfiScsiIoProtocolGuid
+  
+[Pcd]
+  gEfiMdePkgTokenSpaceGuid.PcdPciExpressBaseAddress
+  gEfiByoModulePkgTokenSpaceGuid.AcpiIoPortBaseAddress
+  gEfiMdeModulePkgTokenSpaceGuid.PcdRealTimeClockUpdateTimeout
+
+  
+  
+  

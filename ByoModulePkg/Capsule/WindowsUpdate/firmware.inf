@@ -1,0 +1,48 @@
+[Version]
+Signature   = "$WINDOWS NT$"
+Provider    = %Provider%
+Class       = Firmware
+ClassGuid   = {f2e7dd72-6468-4e36-b6f1-6488f42c1b52}
+DriverVer   = 12/22/2017,10.0.16299.16
+CatalogFile = firmware.cat
+PnpLockdown = 1
+
+[Manufacturer]
+%MfgName% = Microsoft,NTamd64
+
+[Microsoft.NTamd64]
+%FirmwareDesc% = Firmware_Install,UEFI\RES_{0FCEAB65-1FAB-4deb-8C00-12088F1F89A3}
+
+[Firmware_Install.NT]
+CopyFiles = Firmware_CopyFiles
+
+[Firmware_CopyFiles]
+firmware.bin
+
+[Firmware_Install.NT.Hw]
+AddReg = Firmware_AddReg
+
+[Firmware_AddReg]
+HKR,,FirmwareId,,{0FCEAB65-1FAB-4deb-8C00-12088F1F89A3}
+HKR,,FirmwareVersion,%REG_DWORD%,0x00000010
+HKR,,FirmwareFilename,,{0FCEAB65-1FAB-4deb-8C00-12088F1F89A3}\firmware.bin
+
+[SourceDisksNames]
+1 = %DiskName%
+
+[SourceDisksFiles]
+firmware.bin = 1
+
+[DestinationDirs]
+DefaultDestDir = %DIRID_WINDOWS%,Firmware\{0FCEAB65-1FAB-4deb-8C00-12088F1F89A3}
+
+[Strings]
+; localizable
+Provider     = "Nanjing ByoSoft Ltd."
+MfgName      = "ByoSoft Inc."
+FirmwareDesc = "ByoSoft System Firmware 2.0"
+DiskName     = "Firmware Update"
+
+; non-localizable
+DIRID_WINDOWS = 10
+REG_DWORD     = 0x00010001

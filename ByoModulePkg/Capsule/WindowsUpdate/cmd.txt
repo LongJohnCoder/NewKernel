@@ -1,0 +1,5 @@
+
+
+Inf2Cat.exe /driver:"." /os:10_x64
+
+signtool sign /fd sha256 /f pk.pfx firmware.cat

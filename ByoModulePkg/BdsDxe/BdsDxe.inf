@@ -1,0 +1,124 @@
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = BdsDxe
+  FILE_GUID                      = 6D33944A-EC75-4855-A54D-809C75241F6C
+  MODULE_TYPE                    = DXE_DRIVER
+  VERSION_STRING                 = 1.0 
+  ENTRY_POINT                    = BdsInitialize
+
+#
+# The following information is for reference only and not required by the build tools.
+#
+#  VALID_ARCHITECTURES           = IA32 X64 IPF EBC
+#
+
+[Sources]
+  Bds.h
+  BdsEntry.c
+  InstallOptionRom.c
+  BdsPlatform.c
+  BdsPlatform.h
+  Strings.uni
+
+
+
+[Packages]
+  MdePkg/MdePkg.dec
+  MdeModulePkg/MdeModulePkg.dec
+  IntelFrameworkPkg/IntelFrameworkPkg.dec  
+  IntelFrameworkModulePkg/IntelFrameworkModulePkg.dec
+  ByoModulePkg/ByoModulePkg.dec
+
+
+  
+[LibraryClasses]
+  DevicePathLib
+  BaseLib
+  MemoryAllocationLib
+  UefiDriverEntryPoint
+  UefiBootServicesTableLib
+  UefiRuntimeServicesTableLib
+  ReportStatusCodeLib
+  UefiLib
+  BaseMemoryLib
+  DebugLib
+  PrintLib
+  ByoUefiBootManagerLib
+  PcdLib
+  BaseCryptLib
+  LogoLib
+  PlatformCommLib
+  HiiLib
+  LegacyBootManagerLib
+  PciLib
+  ByoCommLib
+  
+  
+[Guids]
+  gByoGlobalVariableGuid
+  gPlatformSetupVariableGuid
+  gSetupPasswordVariableTseGuid
+  gEfiCapsuleVendorGuid
+  gEfiGlobalVariableGuid
+  gEfiEndOfDxeEventGroupGuid
+  gSetupFileGuid
+  gBootMenuFileGuid
+  
+
+[Protocols]
+  gEfiBdsArchProtocolGuid                       ## PROTOCOL PRODUCES
+  gEfiSimpleTextInputExProtocolGuid             ## PROTOCOL CONSUMES
+  gEfiByoFormsetManagerProtocolGuid
+  gEfiBootManagerProtocolGuid
+  gEfiPciRootBridgeIoProtocolGuid
+  gEfiLegacyBiosProtocolGuid
+  gEfiPciIoProtocolGuid
+  gEfiCpuIoProtocolGuid
+  gExitPmAuthProtocolGuid
+  gEfiDxeSmmReadyToLockProtocolGuid
+  gEfiGenericMemTestProtocolGuid
+  gEfiDiskInfoProtocolGuid
+  gEfiAcpiS3SaveProtocolGuid
+  gEfiDevicePathToTextProtocolGuid
+  gEfiSimpleTextInputExProtocolGuid
+  gEfiFirmwareVolume2ProtocolGuid
+  gEfiLegacyBiosPlatformProtocolGuid
+  gUpdateFlashProtocolGuid
+  gBdsAllDriversConnectedProtocolGuid
+  gEfiAtaPassThruProtocolGuid
+  gEfiExtScsiPassThruProtocolGuid  
+  gEfiBootLogoProtocolGuid
+  gEsrtManagementProtocolGuid
+  gEfiBeforeConnectPciRootBridgeGuid
+  gEfiAfterConnectPciRootBridgeGuid
+  gEfiAfterAllPciIoGuid
+  gPlatHostInfoProtocolGuid
+  gPlatAfterConsoleStartProtocolGuid
+  gPlatAfterConsoleEndProtocolGuid
+  gPlatBeforeBiosUpdateProtocolGuid  
+
+
+[Pcd]
+  gEfiMdePkgTokenSpaceGuid.PcdUefiVariableDefaultLangDeprecate
+  gEfiMdePkgTokenSpaceGuid.PcdUgaConsumeSupport
+  gEfiMdePkgTokenSpaceGuid.PcdUefiVariableDefaultLangCodes
+  gEfiMdePkgTokenSpaceGuid.PcdUefiVariableDefaultLang
+  gEfiMdePkgTokenSpaceGuid.PcdUefiVariableDefaultPlatformLangCodes
+  gEfiMdePkgTokenSpaceGuid.PcdUefiVariableDefaultPlatformLang
+  gEfiMdeModulePkgTokenSpaceGuid.PcdFirmwareVendor
+  gEfiMdeModulePkgTokenSpaceGuid.PcdFirmwareRevision
+  gEfiIntelFrameworkModulePkgTokenSpaceGuid.PcdLogoFile
+  gEfiIntelFrameworkModulePkgTokenSpaceGuid.PcdShellFile
+  gEfiMdeModulePkgTokenSpaceGuid.PcdConOutColumn
+  gEfiMdeModulePkgTokenSpaceGuid.PcdConOutRow  
+  gEfiMdePkgTokenSpaceGuid.PcdPciExpressBaseAddress
+  gEfiMdeModulePkgTokenSpaceGuid.PcdSupportUpdateCapsuleReset
+  gEfiByoModulePkgTokenSpaceGuid.PcdPxeOpRomLaunchPolicy
+  gEfiByoModulePkgTokenSpaceGuid.PcdUCREnable
+  gEfiByoModulePkgTokenSpaceGuid.PcdBiosBootModeType
+  gEfiByoModulePkgTokenSpaceGuid.PcdPostPromptTimeOut 
+  
+  
+[Depex]
+  TRUE

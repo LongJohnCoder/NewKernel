@@ -1,0 +1,75 @@
+# @file
+#
+# Copyright (c) 2006 - 2018, Byosoft Corporation.<BR>
+# All rights reserved.This software and associated documentation (if any)
+# is furnished under a license and may only be used or copied in
+# accordance with the terms of the license. Except as permitted by such
+# license, no part of this software or documentation may be reproduced,
+# stored in a retrieval system, or transmitted in any form or by any
+# means without the express written consent of Byosoft Corporation.
+#
+# File Name:
+#   PlatformCapsule.fdf
+#
+# Abstract:
+#   Platform Configuration File
+#
+# Revision History:
+#
+##
+
+
+
+[FV.SystemFirmwareUpdate]
+FvAlignment        = 16
+ERASE_POLARITY     = 1
+MEMORY_MAPPED      = TRUE
+STICKY_WRITE       = TRUE
+LOCK_CAP           = TRUE
+LOCK_STATUS        = TRUE
+WRITE_DISABLED_CAP = TRUE
+WRITE_ENABLED_CAP  = TRUE
+WRITE_STATUS       = TRUE
+WRITE_LOCK_CAP     = TRUE
+WRITE_LOCK_STATUS  = TRUE
+READ_DISABLED_CAP  = TRUE
+READ_ENABLED_CAP   = TRUE
+READ_STATUS        = TRUE
+READ_LOCK_CAP      = TRUE
+READ_LOCK_STATUS   = TRUE
+
+FILE RAW = 85A605FA-1E4A-4d09-ABC9-3CC699BF29CB { # PcdEdkiiSystemFirmwareFileGuid
+    $(OUTPUT_DIRECTORY)/$(TARGET)_$(TOOL_CHAIN_TAG)/FV/bios.fd
+  }
+  
+FILE RAW = ce57b167-b0e4-41e8-a897-5f4feb781d40 { # gEdkiiSystemFmpCapsuleDriverFvFileGuid
+    $(OUTPUT_DIRECTORY)/$(TARGET)_$(TOOL_CHAIN_TAG)/FV/CAPSULEDISPATCHFV.Fv
+  }
+  
+  
+  
+  
+
+[FmpPayload.FmpPayloadSystemFirmwarePkcs7]
+IMAGE_HEADER_INIT_VERSION = 0x02
+IMAGE_TYPE_ID             = 0FCEAB65-1FAB-4deb-8C00-12088F1F89A3 # PcdSystemFmpCapsuleImageTypeIdGuid
+IMAGE_INDEX               = 0x1
+HARDWARE_INSTANCE         = 0x0
+MONOTONIC_COUNT           = 0x2
+CERTIFICATE_GUID          = 4AAFD29D-68DF-49EE-8AA9-347D375665A7 # PKCS7
+
+FILE DATA = $(OUTPUT_DIRECTORY)/$(TARGET)_$(TOOL_CHAIN_TAG)/FV/SystemFirmwareUpdate.FV
+
+
+
+
+[Capsule.Firmware]
+CAPSULE_GUID                = 6dcbd5ed-e82d-4c44-bda1-7194199ad92a # gEfiFmpCapsuleGuid
+#CAPSULE_FLAGS              = 
+CAPSULE_HEADER_SIZE         = 0x20
+CAPSULE_HEADER_INIT_VERSION = 0x1
+
+FMP_PAYLOAD = FmpPayloadSystemFirmwarePkcs7
+
+
+

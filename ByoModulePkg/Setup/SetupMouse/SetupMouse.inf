@@ -1,0 +1,58 @@
+## @file
+# Setup mouse driver.
+# Copyright (c) 2018, Byosoft Software Corporation. All Rights Reserved.
+#
+#  You may not reproduce, distribute, publish, display, perform, modify, adapt,
+#  transmit, broadcast, present, recite, release, license or otherwise exploit
+#  any part of this publication in any form, by any means, without the prior
+#  written permission of Byosoft Software Corporation.
+#
+#
+##
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = SetupMouse
+  FILE_GUID                      = A047B50A-CB25-40b0-A27E-781FBD88E10E
+  MODULE_TYPE                    = DXE_DRIVER
+  VERSION_STRING                 = 1.0
+  ENTRY_POINT                    = InitializeSetupMouse
+
+[Sources]
+  SetupMouse.c
+  SetupMouseCursor.c
+  SetupMouseLib.c
+
+[Packages]
+  ByoModulePkg/ByoModulePkg.dec
+  MdePkg/MdePkg.dec
+  MdeModulePkg/MdeModulePkg.dec
+  IntelFrameworkModulePkg/IntelFrameworkModulePkg.dec
+  IntelFrameworkPkg/IntelFrameworkPkg.dec
+
+[LibraryClasses]
+  MemoryAllocationLib
+  BaseLib
+  UefiBootServicesTableLib
+  UefiDriverEntryPoint
+  UefiRuntimeServicesTableLib
+  BaseMemoryLib
+  DebugLib
+  PrintLib
+  HiiLib
+  DevicePathLib
+  PcdLib
+
+[Guids]
+
+[Protocols]
+  gEfiSimplePointerProtocolGuid
+  gEfiGraphicsOutputProtocolGuid
+  gEfiSetupMouseProtocolGuid
+
+[FeaturePcd]
+
+[Pcd]
+
+[Depex]
+  gEfiSimplePointerProtocolGuid AND gEfiGraphicsOutputProtocolGuid
+
